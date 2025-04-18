@@ -1,0 +1,77 @@
+/*form styles*/
+form {
+ display: flex;
+ flex-direction: column;
+ 
+}
+
+input[type="text"],
+input[type="number"]{
+    width:400px;
+    margin-bottom: 10px; 
+    border: 2px solid #ddd; 
+    border-radius: 4px; 
+    padding: 8px; 
+}
+
+button {
+    width:200px;
+    margin-right: 5px; 
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer; 
+    background-color: #0056b3; 
+    color: white;
+    padding:10px;
+}
+/*body styles*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px; 
+    padding: 0; 
+    background-color: #f4f4f4; 
+}
+/*table styles*/;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #0275d8;
+    color: white;
+}
+h1 {
+    text-align: center;
+}
+tr:nth-child(even) {
+    background-color: white;
+}
+tr:nth-child(odd){
+    background-color: lightblue;
+}
+/*flex container styles*/
+#flex-container {
+    display: flex;
+    justify-content: center;
+    place-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: coral;
+    padding: 20px;
+    width:60%;
+    border-radius: 20px;
+    box-shadow: 20px 20px 10px blue;
+}

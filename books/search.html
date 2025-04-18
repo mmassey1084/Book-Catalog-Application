@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Search Customer</h2>
+    <input type="text" id="searchBox" placeholder="Search by Name...">
+    <table id="booksTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+        <script>
+            const booksTableBody = document.getElementById('booksTable').getElementsByTagName('tbody')[0];
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchBox = document.getElementById('searchBox'); // Get the search box element by its ID
+
+// Add an event listener to the search box for the 'keyup' event
+searchBox.addEventListener('keyup', function() {
+    performSearch(this.value); // Call performSearch with the current input value whenever a key is released
+});
+
+// Function to perform the search and update the table with results
+function performSearch(query) {
+    // Send a GET request to the server with the search query parameter
+    fetch(`/search-books?q=${encodeURIComponent(query)}`)
+        .then(response => response.json()) // Parse the server response as JSON
+        .then(data => {
+            // Get the <tbody> element of the books table to populate with search results
+            const booksTableBody = document.getElementById('booksTable').getElementsByTagName('tbody')[0];
+            booksTableBody.innerHTML = ''; // Clear any previous rows from the table body
+            
+            // Loop through each book in the search results
+            data.forEach(book => {
+                const row = booksTableBody.insertRow(); // Create a new row in the table body
+
+                // Insert cells in the new row for title, author, and year published
+                row.insertCell(0).textContent = book.title; // Set the title cell content
+                row.insertCell(1).textContent = book.author; // Set the author cell content
+                row.insertCell(2).textContent = book.year_published; // Set the year published cell content
+            });
+        })
+        .catch(error => console.error('Error:', error)); // Log any errors that occur during the fetch request
+}
+})
+        </script>
+</body>
+</html>

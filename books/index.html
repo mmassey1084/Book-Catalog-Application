@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Book</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Add New Book to Catalog</h1>
+  <div id="flex-container">
+    <form action="/add-book" method="POST" id="addBookForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required><br>
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required><br>
+      <label for="year_published">Year Published:</label>
+      <input type="number" id="year_published" name="year_published"><br>
+      <button type="submit">Add Book</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('addBookForm').onsubmit = function(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+    // Create an object to hold the form data, with values retrieved from input fields
+    const formData = {
+        title: document.getElementById('title').value, // Get the title from the input field
+        author: document.getElementById('author').value, // Get the author from the input field
+        year_published: document.getElementById('year_published').value, // Get the year published from the input field
+    };
+
+    // Send a POST request to the '/add-book' endpoint with the form data in JSON format
+    fetch('/add-book', {
+        method: 'POST', // Set the HTTP method to POST for adding a new book
+        headers: {
+            'Content-Type': 'application/json', // Specify that the content type is JSON
+        },
+        body: JSON.stringify(formData), // Convert the form data to a JSON string to send in the request
+    })
+    .then(response => response.text()) // Parse the response as plain text
+    .then(data => {
+        alert('Book added successfully'); // Show an alert message upon successful book addition
+        clearForm(); // Clear the form after successful addition by calling the clearForm function
+    })
+    .catch((error) => { // Handle any errors that occur during the request
+        console.error('Error:', error); // Log the error message to the console
+    });
+
+    // Function to clear the form
+    function clearForm() {
+        document.getElementById('addBookForm').reset(); // Reset the form fields to their default values
+    }
+}
+  </script>
+</body>
+</html>
